@@ -1,0 +1,55 @@
+
+- I got a Retroflag GPi Case 2 + Compute Module 4 + 64GB SD card
+- Found a tutorial how to set it up, looks easy
+- Following the tutorial
+- Got the Raspi Imager, installed Recalbox on the SD card, easy
+- Downloaded the GPi Case 2 patch, installed, that patch allows you to use the built in screen instead of HDMI
+- The YT comments are a bit confusing, some say you don't need the patch
+- Putting in the SD card, not that easy, it can move slighlty
+- Putting in the CM4, difficult, it took a bit until I had it in place without it falling out... because no screws are needed you just plug it in, but there is not much space for your fingers :S
+- Starting, it's on, but nothing happens, black screen
+- Try again with HDMI cable instead, the bootloader is trying to boot, looks like the logs are repeating, it stucks bro
+- But there is nothing to start because "no sd card detected"
+- WHYYY ??? Making sure the SD card is properly in place - doesn't help
+- Is it broken? Can't be, Windows can read from it and write to it, no issues. Maybe the slot is broken??
+- Gooooooogle time, again, yay. Turns out there are many different variations of the Compute Module 4
+- Long story short, the light version version can only use the SD card, which I don't have. I have the CM4 8GB RAM and 32GB storage (eMMC)
+- Why is the YT video not mentioning which variant it uses?? stooopid --> dislike
+- Found instructions on how to flash the eMMMC
+- Installing rpiboot, took a while until I had figured out the right parameters and how to mount it as USB
+- As admin: ./rpiboot.exe -v [-d path to mass-gadget-64 etc.]
+- Then you plug in the micro USB-B cable and connect with laptop, start the thing, and rpiboot will do the magic
+- Now the explorer shows an unknown/empty volume D
+- Cool I can use the Imager again to install Recalbox
+- At the end when it verifies the image it fails, SD Card Broken bla bla blaa
+- Nooooooooooooooooooooooo
+- So basically it's saying the onboard storage (eMMC) is broken, have I broken the chip while I was putting it inside the case??
+- Somehow I don't believe it
+- Playing around with PARTDISK, cleaning, formatting, creating new partitions bla bla
+- Now I have actually a working volume that I can access with the explorer
+- Let's try to install Recalbox again with the Raspi Imager, same error at the end
+- After a lot of googling and frustration I got an idea
+- I just need a bit more force, downloading the latest Recalbox image, Rufus go!!
+- That seemed to work quite well, after 2 minutes it was already installed, almost, it stuck at 99.9%
+- I cancelled after waiting a few more minutes, because nothing was happening - mission failed
+- Regardless I tried to boot up the module, black screen
+- Let's try again with HDMI, I cannot believe it Recalbox is starting up
+- I just cannot use any buttons to control it
+- Plugging in my Microsoft controller doesn't work as well
+- Great, I have bruteforced the Recalbox image onto the chip, but I cannot use it... :S
+- Let's mount the chip again and see what else I can do
+- Windows (or rpiboot??) has problems now to mount the eMMC as volume, so I can't really access it, I also can't install anything else on it since I need a volume
+- Shite, I might haved bricked the module :cry:
+- Let's try the same again just from Linux, I just needed to mount it manually and repeat the whole process - Recalbox installed again
+- But I need to install the patch, which is a batch file only used by Windows :S
+- Try starting without patch, as I use the HDMI anyways, well it's starting again but I can't use it...
+- Let's try on Windows again, after several attempts mounting the chip with rpiboot (which sometimes randomly doesn't work???) to get the volumes (Recalbox is creating a few volumes itself during the first start)
+- I finally have access to the chip again, and I could install some roms, wohooo, but before I need to make the system usable
+- Installing the patch again
+- Starting without HDMI, black screen, starting with HDMI, black screen
+- Patch uninstalled, starting without HDMI, black screen, starting with HDMI, IT WORKS
+- Trying to get a terminal, with some keyboard shortcuts, plugged in keyboard, doesn't really work, only a recalbox screen pops up, but no terminal in sight
+
+Next mission: get access to the terminal!!!!
+
+What a journey until now, like a rollercoaster lol, I'm making slowly progress
