@@ -18,7 +18,7 @@ From what I remember my approach was:
 
 If you check the notes from the `README.md`, I was doing some tests with Bob and Alice, I guess that was the stuff I found online, based on that I have written some functions (see `functions.py`) that helped me calculating the greatest common divisor (`gcd(m,n)`), the extended gcd (`egcd(a,b)`), the modular inverse (`modinv(a,m)`), and prime factors (`prime_factors(n)`). I'm glad I had added some links explaining all the calculations, because I cannot remember at all! And `rsa.py` puts everything together, My class RSA does all the computation and spits out the results. The remaining py files were just little helper files for testing.
 
-``` py
+```
 $ python3 ./rsa.py
 ### SOLUTION ###
 (1, 289396593721086953, -2)
