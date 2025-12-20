@@ -49,6 +49,6 @@ The lucky number is <code>1512720</code>
 
 <br/>
 
-I hope you had as much fun as I had cracking the algorithm! (I will share my approach to the solution in another post, at some point, and provide a link to it)
+I hope you had as much fun as I had cracking the algorithm! Check out the next post for my solution.
 
 
