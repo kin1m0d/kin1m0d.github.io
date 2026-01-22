@@ -128,4 +128,5 @@ Additional resources that I have used to troubleshoot
 * <https://www.reddit.com/r/retroflag_gpi/comments/rr9p5k/gpi_case_2_black_screen_at_boot/>
 * <https://www.cytron.io/tutorial/installing-retropie-on-cm4-emmc-with-retroflag-gpi-case-2-swift-performance-actionclear-all-cache_wpnoncef3e213e2f7>
 * <https://www.jeffgeerling.com/blog/2020/how-flash-raspberry-pi-os-compute-module-4-emmc-usbboot>
+* [Retroflag GPi Case 2 w/CM4 - Part 1: Initial Setup Guide](https://www.youtube.com/watch?v=a3WvGds3ihM) (@TeamRetrogue)
 * Note to myself, I installed rpiboot here `C:\Apps\Raspberry Pi\`
