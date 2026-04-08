@@ -1,9 +1,8 @@
 ---
 layout: post
-title:  "Homelab incoming!"
-date:   2026-04-08 14:55:00 +0000
+title: "Homelab incoming!"
+date: 2026-04-08 13:55:00 +0000
 categories: homelab
-published: true
 ---
 
 
