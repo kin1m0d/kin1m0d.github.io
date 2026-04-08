@@ -22,6 +22,7 @@ bundle exec jekyll serve
 </p>
 ```
 - Add extra line breaks with `<br/>`
+- When setting the date `date: 2026-04-08 13:55:00 +0000`, make sure you're not in the future, otherwise the post will be skipped!
 
 
 ## Resources
