@@ -7,7 +7,11 @@ published: false
 ---
 Okay so I guess this is my first blog post, ever? And my own blog, hosted by GitHub, how cool is that???
 
-![awesome dog](https://i.pinimg.com/originals/e9/25/ae/e925ae1430bc72230747042137c5e057.gif)
+
+<p align="center">
+  <img src="https://i.pinimg.com/originals/e9/25/ae/e925ae1430bc72230747042137c5e057.gif" alt="awesome dog"/>
+</p>
+
 
 # How did I set this up?
 I just followed those guides [quickstart](https://docs.github.com/en/pages/quickstart) and [creating-a-github-pages-site-with-jekyll](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/creating-a-github-pages-site-with-jekyll).

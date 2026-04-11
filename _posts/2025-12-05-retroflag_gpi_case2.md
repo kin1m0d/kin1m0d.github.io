@@ -7,8 +7,16 @@ categories: jekyll update
 
 Last year, I got gifted the legendary Game Boy (shoutout to my German bois), in a let's say, much more modern variant! Let me walk you through the pain of setting up this little bugger, luckily I've had documented my pain in short bullet points.
 
-![GPi Case 2 for CM4](https://thepihut.com/cdn/shop/products/gpi-case-2-for-cm4-retroflag-104829-31588508074179_700x.jpg?v=1646518340)
-![Raspberry Pi Compute Module 4](https://assets.raspberrypi.com/static/bdb6ad43efc8fc2590705f10fce9d069/248f1/temperature.webp)
+
+<p align="center">
+  <img src="https://thepihut.com/cdn/shop/products/gpi-case-2-for-cm4-retroflag-104829-31588508074179_700x.jpg?v=1646518340" alt="GPi Case 2 for CM4"/>
+</p>
+
+
+<p align="center">
+  <img src="https://assets.raspberrypi.com/static/bdb6ad43efc8fc2590705f10fce9d069/248f1/temperature.webp" alt="Raspberry Pi Compute Module 4"/>
+</p>
+
 
 # The Goal
 Starting point is a beautiful [Retroflag GPi Case 2](https://thepihut.com/products/gpi-case-2) + [Compute Module 4](https://www.raspberrypi.com/products/compute-module-4/?variant=raspberry-pi-cm4001000) + 64GB SD card. The goal is to assemble everything, install Recalbox, install some games and play!
@@ -40,11 +48,18 @@ Starting point is a beautiful [Retroflag GPi Case 2](https://thepihut.com/produc
 * Now File Explorer shows an unknown/empty volume `D`, which means I can use the Raspi Imager to install Recalbox again, noice
 * 5 hours later *\*in French accent\**
 
-![5 hours later](https://media1.tenor.com/m/0dX6BLx4HZkAAAAC/yeet-yee.gif)
+<p align="center">
+  <img src="https://media1.tenor.com/m/0dX6BLx4HZkAAAAC/yeet-yee.gif" alt="5 hours later"/>
+</p>
+
 * At the end when it verifies the image, it fails with "SD Card broken bla bla blaa"
 * Nooooooooooo
 
-![noooooooooo](https://media1.tenor.com/m/UbgP_VN5GX0AAAAd/noooo-star-wars.gif)
+<p align="center">
+  <img src="https://media1.tenor.com/m/UbgP_VN5GX0AAAAd/noooo-star-wars.gif" alt="noooooooooo"/>
+</p>
+
+
 * So basically it's saying, the onboard storage (eMMC) is broken, have I broken the chip while I was trying to place it inside the case?? Somehow I don't believe it
 * Played around with PARTDISK, cleaning, formatting, creating new partitions bla bla
 * Managed to create a working volume that I can access with the File Explorer
@@ -97,7 +112,9 @@ It's January 2025, after a litte christmas break I'm back from Germany and ready
 * Started the device without HDMI -> it WORKS
 * Niccce
 
-![niceee](https://media1.tenor.com/m/d8GH3gU0abUAAAAC/nice-south-park.gif)
+<p align="center">
+  <img src="https://media1.tenor.com/m/d8GH3gU0abUAAAAC/nice-south-park.gif" alt="niceee"/>
+</p>
 
 
 # It's working

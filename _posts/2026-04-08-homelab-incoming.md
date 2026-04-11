@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Homelab incoming!"
+title: "Homelab Incoming"
 date: 2026-04-08 13:55:00 +0000
 categories: homelab
 ---
