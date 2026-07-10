@@ -1,0 +1,13 @@
+
+{% comment %}
+- goatcounter_code is set in _config.yml
+- jekyll.environment is set automatically when github pages builds the site
+- for local builds, you can set the environment variable JEKYLL_ENV=production e.g.: JEKYLL_ENV=production bundle exec jekyll serve
+{% endcomment %}
+
+<!-- Environment: {{ jekyll.environment }} -->
+<!-- Code: {{ site.goatcounter_code }} -->
+{% if site.goatcounter_code and jekyll.environment == "production" %}
+<script data-goatcounter="https://{{ site.goatcounter_code }}.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+{% endif %}
