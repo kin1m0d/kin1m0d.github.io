@@ -23,7 +23,6 @@ But I'm curious about all kinds of technologies, just to name a few:
 
 Hypothetically, if I added malware to that list, it would probably look a bit suspicious, wouldn't it? Yeah, I thought so, because I have definitely no interest whatsoever in how malware works, especially botnets bore me to death.
 
-<br/>
 
 In my free time I spend way too much time playing chess, occasionally I'll have to add `127.0.0.1 lichess.org` to `/etc/hosts`. So please don't ask me to play chess, I can't say no. I'm also into calisthenics, travelling, hiking, and dancing salsa/bachata.
 

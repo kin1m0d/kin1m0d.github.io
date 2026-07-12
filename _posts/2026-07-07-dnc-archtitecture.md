@@ -23,7 +23,9 @@ This page is currently under construction. A few pieces are missing and I might 
 
 # Introduction
 
-What is this about? Let me start with, what it is not. This is not a proof of concept, it's not a pet project that goes to the code graveyard. It's also not AI slop, or vibe coded. So am I not using AI at all? Quite the contrary, I'm heavily using AI, but in a controlled way, I know what is going on under the hood, this is called AI assisted development. In fact, without AI I wouldn't be able to have developed this platform within 6 month, in my free time, while having a full time job, all by myself. In a way, AI enables me to become the 10x engineer that we all want to be. Maybe 10x is slightly exaggerated, proabably more like 2x-3x? My point is, I can move much quicker than before.
+What is this about? Let me start with, what it is not. This is not a proof of concept, it's not a pet project that goes to the code graveyard. It's also not AI slop, or vibe coded. 
+
+So am I not using AI at all? Quite the contrary, I'm heavily using AI, but in a controlled way, I know what is going on under the hood, this is called AI assisted development. In fact, without AI I wouldn't be able to have developed this platform within 6 month, in my free time, while having a full time job, all by myself. In a way, AI enables me to become the 10x engineer that we all want to be. Maybe 10x is slightly exaggerated, proabably more like 2x-3x? My point is, I can move much quicker than before.
 
 **So, what is it then?** In simple words, it's a platform for dancers where they can find all kinds of events in one place. While it's still early stages, this is production grade quality, or can I just say made in Germany? Well that would be a lie, I live in London. What about *made by a German*? You'll get the point, it's German quality.
 
@@ -57,7 +59,7 @@ The goal wasn't to build the most sophisticated architecture possible. The goal 
 
 
 # Architecture Overview
-The platform uses a traditional three-tier architecture, with a Flutter frontend, FastAPI backend and PostgreSQL database. The backend is implemented as a monolith, it's my Swiss Army knife (I actually don't have one). Additional supporting services handle object storage, monitoring, deployments and security,
+The platform uses a traditional three-tier architecture, with a Flutter frontend, FastAPI backend and PostgreSQL database. The backend is implemented as a monolith, it's my Swiss Army knife (I actually don't have one). Additional supporting services handle object storage, monitoring, deployments and security.
 
 - show diagram
 
@@ -212,11 +214,12 @@ No managed services? Really?
 
 Just to clarify this, I'm not fully avoiding them, for example I use GitHub Actions or Docker Hub to make my life easier, but the actual platform is free of managed services. And I'm not against them! They're great and in many cases it's a smart move to use them! They usually provide a smoother experience, they handle upgrades, backups, monitoring and operational headaches for you. By choosing portable, self-hosted alternatives, I'm taking ownership of those responsibilities myself.
 
-So why am I not using Supbase, Appwrite, Clerk, Auth0, Firabase etc. and push everything to Vercel and I'm done? Everyone does that? Doing everything myself is so much more operational overhead? Exactly, this is the whole point, this is where the fun begins.
+So why am I not using Supbase, Appwrite, Clerk, Auth0, Firabase etc. and push everything to Vercel and I'm done? Everyone does that? Doing everything myself is so much more operational overhead? Exactly, this is the whole point.
 
-![this is where the fun begins](https://tenor.com/uqNk.gif)
+
 
 <div class="tenor-gif-embed" data-postid="4830492" data-share-method="host" data-aspect-ratio="2.08333" data-width="100%"><a href="https://tenor.com/view/this-is-where-the-fun-begins-star-wars-anakin-sassy-excited-gif-4830492">This Is Where The Fun Begins Star Wars GIF</a>from <a href="https://tenor.com/search/this+is+where+the+fun+begins-gifs">This Is Where The Fun Begins GIFs</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+
 
 Yes I want to move fast and this slows me down, but that's okay, I'm not a startup that has to reach milestones for more funding.
 
@@ -245,7 +248,7 @@ And one thing that made me really happy as well, was the native UUID v7 support 
 That was an easy choice to make, I needed something that makes app development for Android **and** iOS simple. I had never used Flutter or written a single line of Dart, so I had to learn this from scratch, but it's very similar to Java or C#.
 
 ### Backend (FastAPI)
-My initial goal was to go with Go (lol), I'm just not familiar with the language. I had written some Go before, but it was more like "I want to do x, let me google how to do x". To speed things up, I decided to start prototyping with Python and switch later to Go. Well I sticked to my beloved Python code as I'm already learning Flutter.
+My initial goal was to go with Go (lol), I'm just not that familiar with the language. I had written some Go before, but it was more like "I want to do x, let me google how to do x". To speed things up, I decided to start prototyping with Python and switch later to Go. Well I sticked to my beloved Python code as I'm already learning Flutter.
 
 But why FastAPI and not Django or Flusk? I was looking for simplicity and performance, FastAPI is build on Starlette and Uvicorn, which gives me `async`. Why is that so good? In synchronous coding, when a request waits for a slow operation, like a database query or an external API call, the entire execution thread stops and waits. With async, the execution thread immediately moves on to serve the next request while waiting for the slow operation to finish.
 
