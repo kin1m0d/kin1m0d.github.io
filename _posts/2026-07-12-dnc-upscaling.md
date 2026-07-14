@@ -37,6 +37,8 @@ The CDN: Your storefront. It intercepts 99% of user download traffic so your 3 G
 - use 3 nodes for Garage
 The 3 Garage Nodes: Your vault. They guarantee that your images are safely written to disk and never lost, even if one server explodes.
 
+- for Garage we enable 3 way replication
+
 
 Caddy
 - scale vertical first, by also incresing open file limits to avoid "too many open files" errors
@@ -80,6 +82,10 @@ If your database handles millions of rows but data is predictable (e.g., logs or
 
 I definitely need to optimise for data reads, rather then writes, so sharding is not interesting yet
 
+I would go the same path that open has gone, https://openai.com/index/scaling-postgresql/
+
+
+
 
 
 # Optimising Service Discovery
@@ -89,3 +95,77 @@ To avoid maintaining Caddyfiles
 - Caddy has an admin API that I could use to dynamically register the API on startup
 
 At some point I have used Consul to add Service Discovery, I guess I would have to do some more research on which option is the best. But this optimisation is optional anyway.
+
+
+
+Summary
+- We have introduced Redis to take load of the database
+- Each service on it's own node
+- Vertically upscaled nodes (where it makes sense)
+- Added CDNs to take load of Garage
+- Garage 3 way replication
+- Scaled FastAPI horizontally, optimised workers
+- Optimised Postgres connection pooling
+- Introduced read replica to take load of the primary instance
+- Optimised Caddy by increasing open file limits
+- Scaled Caddy horizontally
+- Introduced service discovery
+
+
+
+
+# Stage 2 - Multiple locations
+
+The CDN setup stays the same, through Anycast the client will be routed to the nearest datacentre
+
+https://www.cloudflare.com/learning/cdn/glossary/anycast-network/
+
+
+
+Okay we're going multi-cloud! To allow my applications to talk to each other in a secure way, we have to introduce a VPN mesh, by installing Tailscale on each node.
+
+The setup will be the following:
+
+One main location, somewhere central Europe for low latency, where the primary database will live, and two edge locations to absorb heavy read traffic. For the main location I'll choose Frankfurt, Helsinki and Barcelona as edge location.
+
+The main location will get:
+- Postgres primary, 1 node (high RAM/CPU)
+- Redis primary, 1 node
+- Garage storage, 1 node
+
+The edge locations:
+- Postgres read replica, 1 node per location (asynchronous replication from main location)
+- Redis replica, 1 node per location
+- Caddy reverse proxy, 2 nodes per location (for local high availability)
+- FastAPI, 3-5 containers per location
+- Garage storage: 1 node per location (joined to the master cluster to cache and server images locally)
+
+
+How does the data flow
+
+Let's say a user in Barcelona requests event information, and then updates his profile.
+
+The read path, probably 90% of the traffic:
+User -> CDN -> Caddy -> FastAPI -> Redis -> Postgres read replica (instant response, zero trip to Frankfurt)
+
+The write path, probably 10% of the traffic:
+User -> CDN -> Caddy -> FastAPI -> cross-region network trip -> Frankfurt primary Postgres (safe write, asynchronously synced back to Barcelona a few milliseconds later)
+
+Or in other words, read requests are served locally, and write requests are sent through a secure VPN mesh from one cloud to another.
+
+Most of the image reads will be handled by the CDN.
+
+
+
+
+
+
+Further improvements:
+
+I need to lower the MTU for my multi-cloud network. The standard size for a package is 1500 bytes, and before a package leaves a server it gets intercepted by Tailscale and adds its own data headers to the packet. Now the package is like 1580 bytes and therefore too large, and gets split into two packages, all of a sudden I have double the traffic to deal with, causing extra network overhead and spikes my database query latency. To fix this I can lower the MTU to 1420, if the VPN package overhead is 80 bytes, then I'm back at 1500, no packet fragmentation is triggered.
+
+Introduce automated failover, if the primary goes down, a read replica gets promoted to primary
+
+Add queues, for example for asynchronous image processing
+
+With that setup it's easy to add more edge locations to absorb more traffic.
