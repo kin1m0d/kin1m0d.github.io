@@ -14,15 +14,15 @@ This page is currently under construction. A few pieces are missing and I might 
 <br/>
 
 
-# Stage 1
-As prerequisite for all following steps, we will provision one dedicated node per service.
+## Stage 1
+As prerequisite to all following steps, we will provision one dedicated node per service.
 
-## Backend
+### Backend
 - Scale FastAPI vertical first, maybe 4 cores per instance?
 - Add more FastAPI workers, as rule of thumb: (2 * cores) + 1, 9 workers sounds reasonable
 - Scale horizontal by adding more FastAPI nodes, let's say 3?
 
-## Load Balancer
+### Load Balancer
 - Load balance traffic, add FastAPI nodes to Caddyfile (manually for now)
 - Let's go with round robin, as I don't have a large file uploads (it happens in Garage anyway), and I don't have long lasting database queries, if that changes we can still switch to least connection
 - Add health checks to Caddyfile to avoid sending traffic in case a node crashes
@@ -31,11 +31,11 @@ As prerequisite for all following steps, we will provision one dedicated node pe
 
 Having multiple Caddy instances introduces a new problem, each instance will try to issue the SSL certificate. I need to store it in a shared place rather then on the individual node, maybe in Redis?
 
-## Object Storage
+### Object Storage
 - Set up Garage 3 way replication for high availability
 - Add CDN (Cloudflare?) to reduce Garage load
 
-## Database
+### Database
 - Tune postgres, add connection pooler(PgBouncer): PostgreSQL allocates a full operating system process to every single user connection, which eats up RAM. Placing PgBouncer in front of Postgres to pool and reuse connections can instantly double your database's throughput
 - Increase Postgres memory usage
 - Add more RAM and CPU cores to the node
@@ -44,12 +44,12 @@ Having multiple Caddy instances introduces a new problem, each instance will try
 - Partioning, I already partioned events by months, but this could be optimised by moving old data to cold storage
 - Sharding? Nah, I don't think this is necessary, as most of the traffic is reading
 
-I feel quite inspired by how OpenAI has scaled their postgres, it's worth reading their blog post https://openai.com/index/scaling-postgresql/
+I feel quite inspired by how OpenAI has scaled their postgres, it's worth reading their [blog post](https://openai.com/index/scaling-postgresql/)
 
-## Caching
+### Caching
 - Add Redis cache to take even more load off the database and increase performance
 
-## Service Discovery
+### Service Discovery
 - To avoid maintaining Caddyfiles and manually add/remove nodes, I could introduce Consul for dynamic service discovery
 
 
@@ -58,11 +58,11 @@ I feel quite inspired by how OpenAI has scaled their postgres, it's worth readin
 
 ---
 
-# Stage 2 - Multiple Locations
+## Stage 2 - Multiple Locations
 
 We're going multi-cloud! 
 
-To allow my applications to talk to each other in a secure way, we have to introduce a VPN mesh, by installing Tailscale on each node. The setup will be the following:
+To allow my applications to talk to each other in a secure way, we have to introduce a VPN mesh, by installing Tailscale on each node. The setup will be the following.
 
 One main location, somewhere central Europe for low latency, where the primary database will live, and two edge locations to absorb heavy read traffic. For the main location I'll choose Frankfurt, Helsinki and Barcelona as edge location.
 
@@ -79,7 +79,7 @@ The edge locations:
 - Garage storage: 1 node per location (joined to the master cluster to cache and server images locally)
 
 
-## Data Flow
+### Data Flow
 How does the data flow? Let's say a user in Barcelona requests event information, and then updates his profile.
 
 The read path, probably 90% of the traffic:
@@ -96,16 +96,16 @@ Or in other words, read requests are served locally, and write requests are sent
 ---
 
 
-# Further Improvements
+## Further Improvements
 
-## Maximum Transmission Unit
-I need to lower the MTU for my multi-cloud network. The standard size for a package is 1500 bytes, and before a package leaves a server it gets intercepted by Tailscale and adds its own data headers to the packet. Now the package is like 1580 bytes and therefore too large, and gets split into two packages, all of a sudden I have double the traffic to deal with, causing extra network overhead and spikes my database query latency. To fix this I can lower the MTU to 1420, if the VPN package overhead is 80 bytes, then I'm back at 1500, no packet fragmentation is triggered.
+### Maximum Transmission Unit
+Something I was not aware of, I need to lower the MTU for my multi-cloud network. The standard size for a package is 1500 bytes, and before a package leaves a server it gets intercepted by Tailscale and adds its own data headers to the packet. Now the package is like 1580 bytes and therefore too large, and gets split into two packages. All of a sudden I have double the traffic to deal with, causing extra network overhead and spikes my database query latency. To fix this I can lower the MTU to 1420, if the VPN package overhead is 80 bytes, then I'm back at 1500, no packet fragmentation is triggered.
 
-## Failover
-Introduce automated failover, if the primary goes down, a read replica gets promoted to primary
+### Failover
+Introduce automated failover, if the primary goes down, a read replica gets promoted to primary.
 
-## Queues
-Add queues, for example for asynchronous image processing, or in general to absorb request spikes
+### Queues
+Add queues, for example for asynchronous image processing, or in general to absorb request spikes.
 
 
 
@@ -113,10 +113,11 @@ Add queues, for example for asynchronous image processing, or in general to abso
 ---
 
 
-# Next steps
+## Next steps
 
-<div class="tenor-gif-embed" data-postid="7528020969413377685" data-share-method="host" data-aspect-ratio="1" data-width="100%"><a href="https://tenor.com/view/i-cant-wait-to-see-you-silly-funny-funny-dance-funny-as-hell-gif-7528020969413377685">I Cant Wait To See You Silly GIF</a>from <a href="https://tenor.com/search/i+cant+wait+to+see+you-gifs">I Cant Wait To See You GIFs</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
 Kubernetes?
+<div class="tenor-gif-embed" data-postid="7528020969413377685" data-share-method="host" data-aspect-ratio="1" data-width="100%"><a href="https://tenor.com/view/i-cant-wait-to-see-you-silly-funny-funny-dance-funny-as-hell-gif-7528020969413377685">I Cant Wait To See You Silly GIF</a>from <a href="https://tenor.com/search/i+cant+wait+to+see+you-gifs">I Cant Wait To See You GIFs</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+
 
 <br/>
 
@@ -128,5 +129,5 @@ But first we should do some math, figure out how much RAM/CPUs are required for 
 ---
 
 
-# Observability
+## Observability
 More importantly, we haven't talked about observability, I'll cover this in the next post.
