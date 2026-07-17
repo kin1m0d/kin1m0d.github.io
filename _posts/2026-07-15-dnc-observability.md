@@ -23,8 +23,52 @@ To collect metrics we need to add a few exporters to the specific services (Fast
 My initial plan was to use Loki with Promtail, but Promtail has reached end-of-life in March, and Grafana Alloy is the official successor. I don't have experience with either tools, but I assume they have to run on the same node where it scrapes the logs? Loki will definitely join the observability node, everything else remains to be seen.
 
 ### High Availability
-Is it worth over engineering the observability stack to achieve high availability? For example Prometheus is not designed to do that. I will just say, no, it's not worth it, we're not operating in the finance sector. I'm sure there are a few ways to make this more reliable, but for the setup is good enough, especially for the size of the platform. Let's move on.
+Is it worth over engineering the observability stack to achieve high availability? For example Prometheus is not designed to do that. I will just say, no, it's not worth it, we're not operating in the finance sector. I'm sure there are a few ways to make this more reliable, but for now the setup is good enough, especially for the size of the platform. Let's move on.
 
+<br/>
+---
+
+## SLIs and SLOs
+
+Before we move to the next stage, let's define some service level indicators and objectives.
+
+
+And to keep things simple, we'll start only with two critical user facing metrics.
+
+### Defining Indicators
+For a period of 30 days:
+- Availability, 99.5% of successful requests or all non-5xx status codes (successful requests / total requests)
+- Latency, 99.0% of requests completed under 500ms
+
+
+What are the most critical user journes?
+- User logs in
+- User filters for events
+- User opens event
+- User creates event
+- User uploads image
+- User loads image
+
+
+## Defining Indicators
+
+- Login success rate: successful logins / total login attempts
+- Event filter performance: percentage of filter requests completed within 500ms
+- Event load performance: percentage of event loads completed within 1 second
+- Event creation success rate: successful event creations / total creation attempts
+- Image upload success rate: successful uploads / total upload attempts
+- Image load success rate: successful image requests / total image requests
+
+## Defining Objectives
+
+To keep this simple for a one man-army, I'll aim for 99% availability, which allows for roughly 7.3 hours downtime per month.
+
+
+
+
+
+<br/>
+---
 
 ## Stage 2
 

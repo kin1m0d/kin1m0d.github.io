@@ -13,9 +13,9 @@ This page is currently under construction. A few pieces are missing and I might 
 
 <br/>
 
+Let's upscale the platform in stages, and as prerequisite to all following steps, we will provision one dedicated node per service.
 
 ## Stage 1
-As prerequisite to all following steps, we will provision one dedicated node per service.
 
 ### Backend
 - Scale FastAPI vertical first, maybe 4 cores per instance?
@@ -44,7 +44,7 @@ Having multiple Caddy instances introduces a new problem, each instance will try
 - Partioning, I already partioned events by months, but this could be optimised by moving old data to cold storage
 - Sharding? Nah, I don't think this is necessary, as most of the traffic is reading
 
-I feel quite inspired by how OpenAI has scaled their postgres, it's worth reading their [blog post](https://openai.com/index/scaling-postgresql/)
+I feel quite inspired by how OpenAI has scaled their postgres, it's worth reading their [blog post](https://openai.com/index/scaling-postgresql/).
 
 ### Caching
 - Add Redis cache to take even more load off the database and increase performance
@@ -83,10 +83,10 @@ The edge locations:
 How does the data flow? Let's say a user in Barcelona requests event information, and then updates his profile.
 
 The read path, probably 90% of the traffic:
-`User -> CDN -> Caddy -> FastAPI -> Redis -> Postgres read replica` (instant response, zero trip to Frankfurt)
+`User -> CDN -> Caddy -> FastAPI -> Redis -> Postgres read replica` (instant response, zero trip to Frankfurt).
 
 The write path, probably 10% of the traffic:
-`User -> CDN -> Caddy -> FastAPI -> cross-region network trip -> Frankfurt primary Postgres` (safe write, asynchronously synced back to Barcelona a few milliseconds later)
+`User -> CDN -> Caddy -> FastAPI -> cross-region network trip -> Frankfurt primary Postgres` (safe write, asynchronously synced back to Barcelona a few milliseconds later).
 
 Or in other words, read requests are served locally, and write requests are sent through a secure VPN mesh from one cloud to another. Most of the image reads will be handled by the CDN. With that setup it will be easy to scale up the platform by adding more edge locations.
 
@@ -113,7 +113,7 @@ Add queues, for example for asynchronous image processing, or in general to abso
 ---
 
 
-## Next steps
+## Next Steps
 
 Kubernetes?
 <div class="tenor-gif-embed" data-postid="7528020969413377685" data-share-method="host" data-aspect-ratio="1" data-width="100%"><a href="https://tenor.com/view/i-cant-wait-to-see-you-silly-funny-funny-dance-funny-as-hell-gif-7528020969413377685">I Cant Wait To See You Silly GIF</a>from <a href="https://tenor.com/search/i+cant+wait+to+see+you-gifs">I Cant Wait To See You GIFs</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
@@ -122,7 +122,7 @@ Kubernetes?
 <br/>
 
 <div class="tenor-gif-embed" data-postid="19710542" data-share-method="host" data-aspect-ratio="1.52381" data-width="100%"><a href="https://tenor.com/view/meonly-gif-19710542">Meonly GIF</a>from <a href="https://tenor.com/search/meonly-gifs">Meonly GIFs</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
-But first we should do some math, figure out how much RAM/CPUs are required for each service to run smoothly, and figure out how many users or requests can be served at the same time.
+But first we should do some math, and figure out how much RAM/CPUs are required for each service to run smoothly, and how many users or requests can be served at the same time.
 
 
 <br/>
@@ -130,4 +130,4 @@ But first we should do some math, figure out how much RAM/CPUs are required for 
 
 
 ## Observability
-More importantly, we haven't talked about observability, I'll cover this in the next post.
+More importantly, we haven't talked about observability, which I'll cover in the [next post](https://kin1m0d.github.io/projects/dancehub/2026/07/15/dnc-observability.html).

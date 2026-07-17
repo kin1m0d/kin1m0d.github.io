@@ -8,6 +8,9 @@ published: true
 ---
 
 How I designed, built and operate a self-hosted platform as a solo engineer, making deliberate trade-offs around cost, reliability, simplicity and operational ownership.
+- [Jump to the upscaling post](https://kin1m0d.github.io/projects/dancehub/2026/07/12/dnc-upscaling.html)
+- [Jump to the observability post](https://kin1m0d.github.io/projects/dancehub/2026/07/15/dnc-observability.html)
+
 
 <br/>
 
@@ -21,11 +24,13 @@ This page is currently under construction. A few pieces are missing and I might 
 
 
 
+
+
 # Introduction
 
 What is this about? Let me start with, what it is not. This is not a proof of concept, it's not a pet project that goes to the code graveyard. It's also not AI slop, or vibe coded. 
 
-So am I not using AI at all? Quite the contrary, I'm heavily using AI, but in a controlled way, I know what is going on under the hood, this is called AI assisted development. In fact, without AI I wouldn't be able to have developed this platform within 6 month, in my free time, while having a full time job, all by myself. In a way, AI enables me to become the 10x engineer that we all want to be. Maybe 10x is slightly exaggerated, proabably more like 2x-3x? My point is, I can move much quicker than before.
+So am I not using AI at all? Quite the contrary, I'm heavily using AI, but in a controlled way, I know what is going on under the hood, this is called AI assisted development. In fact, without AI I wouldn't be able to have developed this platform within the last few months, in my free time, while having a full time job, all by myself. In a way, AI enables me to become the 10x engineer that we all want to be. Maybe 10x is slightly exaggerated, proabably more like 2x-3x? My point is, I can move much quicker than before.
 
 **So, what is it then?** In simple words, it's a platform for dancers where they can find all kinds of events in one place. While it's still early stages, this is production grade quality, or can I just say made in Germany? Well that would be a lie, I live in London. What about *made by a German*? You'll get the point, it's German quality.
 
@@ -165,49 +170,25 @@ My advice, use multiple environments! Investing the extra time in multiple envir
 
 
 ---
-
-
-
-
 ## Why One VPS Is Enough (For Now)
 - Acknowledge SPOF
 - Explain trade-offs
 - Cost vs complexity
 - Avoiding premature optimisation
 
-Let's address the elephant in the room, this runs all one a single server? I know I know, it's a single point of failure, but honestly this is all I need right now.
-
-...
-
-Buuut, just because this is all I need right now, I haven't phantasized about the dream setup, check this out -> Let's Scale Up
-
-
+Let's address the elephant in the room, it runs all one a single server?? I know I know, it's a single point of failure. This is an accepted risk, at this stage it doesn't make sense to scale up, so for now the complexity and cost can stay low. Check out my [upscaling post](https://kin1m0d.github.io/projects/dancehub/2026/07/12/dnc-upscaling.html) if you're interested in further optimisations.
 
 
 ---
-
-
-
-
 ## Why I Chose a Monolith
-- Simplicity
-- Team size
-- Operational overhead
-- Trade-offs
-
 When I first started thinking about the archtiecture, I was dreaming of microservices, all written in Go, autoscaling with Kubernetes and all that fancy stuff. But do you know the complexity of distributed systems? Just think about deployments, networking, monitoring, or debugging. Every service boundary eventually becomes an operational burden.
 
-I want to move fast, and keep things simple (even though difficult is more fun lol), and I'm the only engineer working on the platform, so let's stay realistic and keep the fancy stuff away. For now, because knowing me, I'd happily move to Kuberentes and make evertyhing even more complicated, and of course I'll manage the cluster myself instead of going for GKE.
+I want to move fast, and keep things simple (even though difficult is more fun lol), and I'm the only engineer working on the platform, so let's stay realistic and keep the fancy stuff away. For now, because knowing me, I'd happily move to Kuberentes and make evertyhing even more complicated, and of course I'll manage the cluster myself instead of going for GKE or similar.
 
 
 
 
 ---
-
-
-
-
-
 ## Cloud Agnostic by design
 
 No managed services? Really?
@@ -229,12 +210,11 @@ A few other reasons why I choose to go the more difficult way:
 - Data sovereignty, I want to be in control of the data and eventualy be GDPR compliant
 - Architectural control, while I'm being far away from optimising every bit, this could be a limitation if you're working with a black box
 
-That all is a conscious trade-off. I accept a little more operational work in exchange for lower costs, fewer external dependencies and the freedom to move the platform wherever I want. Will I stay cloud agnostic forever? Most probably not. If the operational overhead becomes too much and the benefits outweigh the costs, that's the point where I'll switch. The goal isn't ideological purity. The goal is making sure every dependency earns its place in the architecture.
+It's a conscious trade-off. I accept a little more operational work in exchange for lower costs, fewer external dependencies and the freedom to move the platform wherever I want. Will I stay cloud agnostic forever? Most probably not. If the operational overhead becomes too much and the benefits outweigh the costs, that's the point where I'll switch.
+
+
 
 ---
-
-
-
 ## Tech Stack
 
 ### Database (Postgres)
@@ -268,7 +248,7 @@ Which proxy do I choose, this was a battle between Traefik, HAProxy, Nginx and C
 ### Cloud Service Provider (Hetzner)
 This research took a long time, there are plenty of options and so many differences in terms of pricing and what they have to offer in general. I actually had my prototype running on GCP, but went for Hetzner, simply because of the low compute and storage cost, infrastructure is in Germany -> GDPR check. And lastly Germany is central Europe, that should keep the latency low for everyone (well only for Europeans of course).
 
-### Monitoring 
+### Observability
 Grafana/Prometheus
 Industry standard, we use it at work, I already know how to use it, it does what I need, I'll use it, me happy.
 
