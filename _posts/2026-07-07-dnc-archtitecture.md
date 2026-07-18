@@ -249,22 +249,28 @@ Which proxy do I choose, this was a battle between Traefik, HAProxy, Nginx and C
 This research took a long time, there are plenty of options and so many differences in terms of pricing and what they have to offer in general. I actually had my prototype running on GCP, but went for Hetzner, simply because of the low compute and storage cost, infrastructure is in Germany -> GDPR check. And lastly Germany is central Europe, that should keep the latency low for everyone (well only for Europeans of course).
 
 ### Observability
-Grafana/Prometheus
-Industry standard, we use it at work, I already know how to use it, it does what I need, I'll use it, me happy.
+Check out this [post](https://kin1m0d.github.io/projects/dancehub/2026/07/15/dnc-observability.html).
 
 
-
-
-## Why not Kubernetes?
-
-
+---
 ## Infrastructure as Code
-
 While I'm not using any specific servers from any cloud provider, 
 While Terraform makes it easy to switch between providers, I would still need to adjust the code to make it work for that specific provider. But that is only a minor annoyance, and the main goal to avoid vendor lock in is achieved.
 
+To provision one single server that is quite easy and almost not worth talking about it. But the plan is to go multi-cloud with multiple environments. I guess the biggest challenge is to write modules that have the same interface, that allow me to switch seemlessly between providers. With a generic cloud-init script I can prepare the nodes to join the VPN mesh and install Docker and other things. I don't like the idea of Terraform workspaces, so I'll go the multi-directory path. That brings me to the question, should I use Terragrunt? Nah not yet, I'll look into this when the complexity increases. What to do with my state file, I might just put it in my Onedrive? Problem solved lol.
 
 
+---
 ## Security
+- Cloudflare proxy: Cloudflare sits at front in the trenches, acting as a shield that hides my actual VPS IP. DDoS attack? No problem, Cloudlfare absorbs it.
+- TLS: Caddy handles all the SSL/TLS certificates automatically behind the scenes.
+- Firewall: Everything that is not port 80, 443 gets blocked, HTTP traffic gets redirected to HTTPS.
+- SSH: Only SSH keys allowed.
+- Brute force mitigation: Intrusion detector blocks any brute force attacks.
+- Docker isolation: Containers live in an isolated internal Docker network, keeping the database completely hidden from the public internet.
+- CI/CD: GitHub Actions pushes updates using encrypted repository secrets to handle SSH keys, no credentials ever touch the codebase.
+- Proactive monitoring: Alert if system resources showing weird resource spikes that might point to a security breach.
+- Secure Auditing: Loki will centralize application logs to help trace any suspicious activity.
+
 
 

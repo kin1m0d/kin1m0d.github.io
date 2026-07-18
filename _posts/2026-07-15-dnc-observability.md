@@ -63,7 +63,7 @@ What are the most critical user journes?
 
 To keep this simple for a one man-army, I'll aim for 99% availability, which allows for roughly 7.3 hours downtime per month.
 
-
+<div class="tenor-gif-embed" data-postid="16839780121924734769" data-share-method="host" data-aspect-ratio="0.871486" data-width="100%"><a href="https://tenor.com/view/marmalady-loading-cat-loading-no-thoughts-head-empty-orange-cat-gif-16839780121924734769">Marmalady Loading Cat GIF</a>from <a href="https://tenor.com/search/marmalady+loading-gifs">Marmalady Loading GIFs</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
 
 
 
