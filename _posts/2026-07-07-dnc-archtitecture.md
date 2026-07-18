@@ -53,14 +53,9 @@ So am I not using AI at all? Quite the contrary, I'm heavily using AI, but in a 
 
 This list has influenced all technical decision in the project.
 
-sustainable
-
-The goal wasn't to build the most sophisticated architecture possible. The goal was to build a useful product while making deliberate trade-offs around cost, reliability, operational ownership and long-term maintainability.
-
 
 
 ---
-
 
 
 # Architecture Overview
