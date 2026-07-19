@@ -61,8 +61,7 @@ This list has influenced all technical decision in the project.
 # Architecture Overview
 The platform uses a traditional three-tier architecture, with a Flutter frontend, FastAPI backend and PostgreSQL database. The backend is implemented as a monolith, it's my Swiss Army knife (I actually don't have one). Additional supporting services handle object storage, monitoring, deployments and security.
 
-- show diagram
-
+![dnc-architecture-v1.png](https://github.com/kin1m0d/kin1m0d.github.io/assets/images/dnc-architecture-v1.png)
 
 
 ## Request flow
@@ -70,52 +69,7 @@ The API acts as the central entry point for business logic, authentication and d
 
 The client can then upload the image directly to Garage without the API acting as a middleman. Once the upload is complete, the API processes the image, generates additional sizes and stores the relevant metadata in PostgreSQL.
 
-When users later browse events or profiles, the API returns metadata and image URLs, while the actual image content is served directly from Garage. This keeps large file transfers away from the API, reduces bandwidth requirements on the application layer and allows the backend to focus on business logic instead of acting as a file proxy.
-
-```mermaid
-flowchart TD
-
-    User[Flutter App]
-    CF[Cloudflare]
-    Caddy[Caddy]
-    API[FastAPI]
-    DB[(PostgreSQL)]
-    Garage[(Garage S3)]
-    ImgProc[Image Processing]
-
-    %% Standard API requests
-    User --> CF
-    CF --> Caddy
-    Caddy --> API
-    API <--> DB
-
-    %% Image upload flow
-    User -->|Request Upload URL| API
-    API -->|Generate Pre-Signed URL| User
-    User -->|Direct Upload| Garage
-
-    Garage --> ImgProc
-    ImgProc -->|Store Metadata| DB
-
-    %% Image retrieval flow
-    User -->|Request Event/Profile| API
-    API -->|Return Metadata + Image URLs| User
-    User -->|Download Image| Garage
-
-    %% Monitoring (optional)
-    subgraph Observability
-        Prom[Prometheus]
-        Graf[Grafana]
-        Loki[Loki]
-    end
-
-    API -. Metrics .-> Prom
-    Caddy -. Metrics .-> Prom
-    Prom --> Graf
-    API -. Logs .-> Loki
-    Caddy -. Logs .-> Loki
-    Loki --> Graf
-```
+When users browse events or profiles, the API returns metadata and image URLs, while the actual image content is served directly from Garage. This keeps large file transfers away from the API, reduces bandwidth and allows the backend to focus on business logic instead of acting as a file server.
 
 
 

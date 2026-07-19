@@ -6,14 +6,7 @@ categories: blog sre
 published: true
 ---
 
-<div style="background-color: #fff9e6; border-left: 4px solid #f59e0b; color: #78350f; padding: 16px; margin: 20px 0; border-radius: 4px;" markdown="1">
-💡 **Work in Progress**  
-This page is currently under construction. A few pieces are missing and I might adjust small bits.
-</div>
-
-<br/>
-
-This is your SRE crashcourse! Site Reliability Engineering is not just a job title, it's a framework with three core concepts
+Site Reliability Engineering is not just a job title, it's a framework with three core concepts
 1. SLI: Service Level Indicator
 2. SLO: Service Level Objective
 3. SLA: Service Level Agreement
@@ -55,17 +48,6 @@ Each nine costs ~10x more than the last, exponential more engineering effort.
 | 99.999% | 1000x |
 
 
-
-THe thing to keep in mind
-For 
-
-vs
-
-Deploy freely, where every change is a risk and can cause an outage
-
-How do you deal with this? 
-
-
 ## Error Budget
 If you would aim for 100% reliability, it means you can't change anything, innovation stops. But how do you determine if you should deploy new features or work on reliability? The solution is called error budget. Error budget is basically a currency that you can use to deploy freely, when you have consumed the error budget, teams should freeze deployments and focus on reliability.
 
@@ -76,11 +58,7 @@ Let's say we have an SLO of 99.9% availability for 30 days, that gives us an err
 ## User journey based SLIs
 To give your users the best experience we'll focus on the parts that are important for the users experience.
 
-For an e-commerce platform, a user journey would be something like this:
-1. Browsing products
-2. Adding products to cart
-3. Checking out cart
-4. Tracking order
+For an e-commerce platform, a user journey would be something like this: Browsing products -> Adding products to cart -> Checking out cart -> Tracking order.
 
 - Checkout: most critical part, as money is involved -> 99.95% availability
 - Browsing: important function -> 99.9% availability

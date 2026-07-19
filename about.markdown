@@ -1,6 +1,6 @@
 ---
 layout: page
-title: About
+title: About Me
 permalink: /about/
 ---
 
@@ -34,11 +34,11 @@ Where do I start? I have way too many plans and sadly a day has only 24 hours. B
 
 For now, I'll continue sharpening my **DevOps skills**. There are a few certifications I'm considering, although I'm not entirely convinced if they're worth my time? Because I want to believe real world experience beats certificates every time.
 
-That said, certificates look much nicer on a CV than: `trust me bro, I know k8s`
+That said, certificates look much nicer on a CV than, *trust me bro, I know k8s*
 
 After I've spent enough time drowning in yaml and riding ci/cd pipelines through the cloud, I'll return to my very first quest: **Cyber Security**. 
 
-And here I'm eyeing with some certifcations as well, I would go for something like CEH or CISSP. Whether I actually end up doing that or get distracted by another shiny piece of technology remains to be seen.
+And here I'm eyeing with some certifcations as well, I would go for something like **CEH** or **CISSP**. Whether I actually end up doing that or get distracted by another shiny piece of technology remains to be seen.
 
 
 
@@ -48,7 +48,7 @@ And let's not forget about my other side quests, I would love to do:
 
 - Build my own operating system (because clearly Linux isn't complicated enough)
 - Build a video game and actually finish it
-- Properly learn Go and use it for real projects (or Rust?)
+- Learn Go properly and use it for real projects (or Rust?)
 - Build my own database, a Redis clone? Preferably in Go because apparently I enjoy making things harder for myself
 - Write blog posts about the things I'm building and learning (getting some writing skills)
 - Develop deeper DBA and SysAdmin skills

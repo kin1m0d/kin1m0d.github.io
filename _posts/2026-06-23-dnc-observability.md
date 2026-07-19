@@ -61,7 +61,7 @@ What are the most critical user journes?
 
 ## Defining Objectives
 
-To keep this simple for a one man-army, I'll aim for 99% availability, which allows for roughly 7.3 hours downtime per month.
+To keep this simple for a one man-army, I'll aim for 99% availability, which allows for roughly 7.3 hours downtime per month. More information on this topic is coming soon, meanwhile check out my [SLI vs SLO vs SLA post](https://kin1m0d.github.io/blog/sre/2026/05/12/sli-slo-sla.html).
 
 <div class="tenor-gif-embed" data-postid="16839780121924734769" data-share-method="host" data-aspect-ratio="0.871486" data-width="100%"><a href="https://tenor.com/view/marmalady-loading-cat-loading-no-thoughts-head-empty-orange-cat-gif-16839780121924734769">Marmalady Loading Cat GIF</a>from <a href="https://tenor.com/search/marmalady+loading-gifs">Marmalady Loading GIFs</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
 
