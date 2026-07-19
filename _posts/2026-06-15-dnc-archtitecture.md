@@ -2,14 +2,14 @@
 layout: post
 title: "Building a Cloud-Agnostic Platform for Dancers While Avoiding Managed Services"
 description: "How I designed, built and operate a self-hosted platform as a solo engineer, making deliberate trade-offs around cost, reliability, simplicity and operational ownership."
-date: 2026-07-07 17:38:00 +0000
+date: 2026-06-15 17:38:00 +0000
 categories: projects dancehub
 published: true
 ---
 
 How I designed, built and operate a self-hosted platform as a solo engineer, making deliberate trade-offs around cost, reliability, simplicity and operational ownership.
-- [Jump to the upscaling post](https://kin1m0d.github.io/projects/dancehub/2026/07/12/dnc-upscaling.html)
-- [Jump to the observability post](https://kin1m0d.github.io/projects/dancehub/2026/07/15/dnc-observability.html)
+- [Jump to the upscaling post](https://kin1m0d.github.io/projects/dancehub/2026/06/20/dnc-upscaling.html)
+- [Jump to the observability post](https://kin1m0d.github.io/projects/dancehub/2026/06/23/dnc-observability.html)
 
 
 <br/>
@@ -171,7 +171,7 @@ My advice, use multiple environments! Investing the extra time in multiple envir
 - Cost vs complexity
 - Avoiding premature optimisation
 
-Let's address the elephant in the room, it runs all one a single server?? I know I know, it's a single point of failure. This is an accepted risk, at this stage it doesn't make sense to scale up, so for now the complexity and cost can stay low. Check out my [upscaling post](https://kin1m0d.github.io/projects/dancehub/2026/07/12/dnc-upscaling.html) if you're interested in further optimisations.
+Let's address the elephant in the room, it runs all one a single server?? I know I know, it's a single point of failure. This is an accepted risk, at this stage it doesn't make sense to scale up, so for now the complexity and cost can stay low. Check out my [upscaling post](https://kin1m0d.github.io/projects/dancehub/2026/06/20/dnc-upscaling.html) if you're interested in further optimisations.
 
 
 ---
@@ -244,7 +244,7 @@ Which proxy do I choose, this was a battle between Traefik, HAProxy, Nginx and C
 This research took a long time, there are plenty of options and so many differences in terms of pricing and what they have to offer in general. I actually had my prototype running on GCP, but went for Hetzner, simply because of the low compute and storage cost, infrastructure is in Germany -> GDPR check. And lastly Germany is central Europe, that should keep the latency low for everyone (well only for Europeans of course).
 
 ### Observability
-Check out this [post](https://kin1m0d.github.io/projects/dancehub/2026/07/15/dnc-observability.html).
+Check out this [post](https://kin1m0d.github.io/projects/dancehub/2026/06/23/dnc-observability.html).
 
 
 ---
@@ -257,15 +257,17 @@ To provision one single server that is quite easy and almost not worth talking a
 
 ---
 ## Security
-- Cloudflare proxy: Cloudflare sits at front in the trenches, acting as a shield that hides my actual VPS IP. DDoS attack? No problem, Cloudlfare absorbs it.
-- TLS: Caddy handles all the SSL/TLS certificates automatically behind the scenes.
-- Firewall: Everything that is not port 80, 443 gets blocked, HTTP traffic gets redirected to HTTPS.
-- SSH: Only SSH keys allowed.
-- Brute force mitigation: Intrusion detector blocks any brute force attacks.
-- Docker isolation: Containers live in an isolated internal Docker network, keeping the database completely hidden from the public internet.
-- CI/CD: GitHub Actions pushes updates using encrypted repository secrets to handle SSH keys, no credentials ever touch the codebase.
-- Proactive monitoring: Alert if system resources showing weird resource spikes that might point to a security breach.
-- Secure Auditing: Loki will centralize application logs to help trace any suspicious activity.
+- Proxy: Cloudflare sits at front in the trenches, acting as a shield that hides my actual VPS IP. DDoS attack? No problem, Cloudlfare absorbs it
+- TLS: Caddy handles all the SSL/TLS certificates automatically behind the scenes
+- Firewall: Everything that is not port 80, 443 gets blocked, HTTP traffic gets redirected to HTTPS
+- SSH: Only SSH keys allowed
+- Brute force mitigation: Intrusion detector blocks any brute force attacks
+- Docker isolation: Containers live in an isolated internal Docker network, keeping the database completely hidden from the public internet
+- Secrets: GitHub Actions pushes updates using encrypted repository secrets to handle SSH keys, no credentials ever touch the codebase
+- Proactive monitoring: Alert if system resources showing weird resource spikes that might point to a security breach
+- Secure Auditing: Loki will centralize application logs to help trace any suspicious activity
+- Dependencies: Integrate Dependabot to catch insecure packages
+- SAST: For automated static security testing, Snyk will be added to the pipline
 
 
 

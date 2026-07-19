@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Platform Observability"
-date: 2026-07-15 13:40:00 +0000
+date: 2026-06-23 13:40:00 +0000
 categories: projects dancehub
 published: true
 ---

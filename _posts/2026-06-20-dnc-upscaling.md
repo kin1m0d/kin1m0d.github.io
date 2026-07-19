@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Platform Upscaling"
-date: 2026-07-12 15:56:00 +0000
+date: 2026-06-20 15:56:00 +0000
 categories: projects dancehub
 published: true
 ---
@@ -130,4 +130,4 @@ But first we should do some math, and figure out how much RAM/CPUs are required 
 
 
 ## Observability
-More importantly, we haven't talked about observability, which I'll cover in the [next post](https://kin1m0d.github.io/projects/dancehub/2026/07/15/dnc-observability.html).
+More importantly, we haven't talked about observability, which I'll cover in the [next post](https://kin1m0d.github.io/projects/dancehub/2026/06/23/dnc-observability.html).
