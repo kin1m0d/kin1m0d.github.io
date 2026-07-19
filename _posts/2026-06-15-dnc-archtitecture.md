@@ -61,7 +61,16 @@ This list has influenced all technical decision in the project.
 # Architecture Overview
 The platform uses a traditional three-tier architecture, with a Flutter frontend, FastAPI backend and PostgreSQL database. The backend is implemented as a monolith, it's my Swiss Army knife (I actually don't have one). Additional supporting services handle object storage, monitoring, deployments and security.
 
-![dnc-architecture-v1.png](https://github.com/kin1m0d/kin1m0d.github.io/assets/images/dnc-architecture-v1.png)
+<figure class="post-image">
+  <img
+    src="{{ '/assets/images/dnc-architecture-v1.png' | relative_url }}"
+    alt="Architecture diagram of the Dancehub platform"
+    loading="lazy"
+    width="1400"
+    height="788"
+  />
+  <figcaption>Dancehub platform architecture (v1)</figcaption>
+</figure>
 
 
 ## Request flow
