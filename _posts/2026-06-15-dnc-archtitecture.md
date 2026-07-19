@@ -69,7 +69,7 @@ The platform uses a traditional three-tier architecture, with a Flutter frontend
     width="1400"
     height="788"
   />
-  <figcaption>Dancehub platform architecture (v1)</figcaption>
+  <!-- <figcaption>Dancehub platform architecture</figcaption> -->
 </figure>
 
 
