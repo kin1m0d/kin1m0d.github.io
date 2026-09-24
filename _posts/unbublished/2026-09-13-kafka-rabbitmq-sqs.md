@@ -1,4 +1,3 @@
-
 ---
 layout: post
 title:  "Kafka, RabbitMQ, SQS? Which one is better?"
