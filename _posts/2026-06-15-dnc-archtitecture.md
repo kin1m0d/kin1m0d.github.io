@@ -129,11 +129,6 @@ My advice, use multiple environments! Investing the extra time in multiple envir
 
 ---
 ## Why One VPS Is Enough (For Now)
-- Acknowledge SPOF
-- Explain trade-offs
-- Cost vs complexity
-- Avoiding premature optimisation
-
 Let's address the elephant in the room, it runs all one a single server?? I know I know, it's a single point of failure. This is an accepted risk, at this stage it doesn't make sense to scale up, so for now the complexity and cost can stay low. Check out my [upscaling post](https://kin1m0d.github.io/projects/dancehub/2026/06/20/dnc-upscaling.html) if you're interested in further optimisations.
 
 
